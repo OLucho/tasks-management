@@ -1,7 +1,11 @@
 import { Module } from '@nestjs/common';
+import dotenv = require('dotenv');
+dotenv.config();
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmConfig } from './config/typeorm.config';
 import { TasksModule } from './tasks/tasks.module';
 
 @Module({
-  imports: [TasksModule],
+  imports: [TypeOrmModule.forRoot(TypeOrmConfig), TasksModule],
 })
 export class AppModule {}
