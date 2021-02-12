@@ -20,7 +20,7 @@ export class AuthRepository extends Repository<User> {
       if (error.code === DUPLICATE_USERNAME_ERROR) {
         throw new ConflictException('Sorry, Username already exists');
       } else {
-        throw new InternalServerErrorException('Wops, Something went wrong');
+        throw new InternalServerErrorException('Wops   Something went wrong');
       }
     }
   }
