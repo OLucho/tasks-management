@@ -1,3 +1,7 @@
+import {
+  ConflictException,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { EntityRepository, Repository } from 'typeorm';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { User } from './user.entity';
@@ -9,6 +13,15 @@ export class AuthRepository extends Repository<User> {
     const user = new User();
     user.username = username;
     user.password = password;
-    await user.save();
+    try {
+      await user.save();
+    } catch (error) {
+      const DUPLICATE_USERNAME_ERROR = '23505';
+      if (error.code === DUPLICATE_USERNAME_ERROR) {
+        throw new ConflictException('Sorry, Username already exists');
+      } else {
+        throw new InternalServerErrorException('Wops, Something went wrong');
+      }
+    }
   }
 }
