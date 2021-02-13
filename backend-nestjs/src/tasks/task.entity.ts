@@ -3,7 +3,7 @@ import {
   BaseEntity,
   Column,
   Entity,
-  ManyToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { TaskStatus } from './task.model';
@@ -18,6 +18,6 @@ export class Task extends BaseEntity {
   description: string;
   @Column()
   status: TaskStatus;
-  @ManyToMany((type) => User, (user) => user.tasks, { eager: false })
+  @ManyToOne((type) => User, (user) => user.tasks, { eager: false })
   user: User;
 }
