@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   Post,
   UseGuards,
   ValidationPipe,
@@ -29,7 +30,7 @@ export class AuthController {
     return this.authService.signIn(authCredentialsDto);
   }
 
-  @Post('/user')
+  @Get('/user')
   @UseGuards(AuthGuard())
   getUser(@GetUser() user: User) {
     const userData = {
