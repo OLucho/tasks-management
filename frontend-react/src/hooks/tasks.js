@@ -1,5 +1,6 @@
 import { createContext, useContext, useCallback, useState } from "react";
 import api from "../services/api";
+import queryString from "query-string";
 
 const TasksContext = createContext();
 
@@ -49,6 +50,26 @@ export function TasksProvider({ children }) {
     [tasks]
   );
 
+  const getTasksFiltered = useCallback(async (status, search) => {
+    try {
+      const queryObj = {};
+
+      if (status.length) {
+        queryObj.status = status;
+      }
+
+      if (search.length) {
+        queryObj.search = search;
+      }
+      const queryStr = queryString.stringify(queryObj);
+      const res = await api.get("/tasks" + (queryStr ? `?${queryStr}` : ""));
+      const newTasks = res.data;
+      setTasks(newTasks);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }, []);
+
   const handleStatusChange = useCallback(async (id, status) => {
     try {
       await api.patch(`/tasks/${id}/status`, { status });
@@ -65,6 +86,7 @@ export function TasksProvider({ children }) {
         deleteTask,
         createTask,
         handleStatusChange,
+        getTasksFiltered,
       }}
     >
       {children}

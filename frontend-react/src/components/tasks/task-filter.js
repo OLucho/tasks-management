@@ -9,13 +9,16 @@ import {
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { useState } from "react";
+import { useTasks } from "../../hooks/tasks";
 
 export default function TasksFilter() {
   const [status, setStatus] = useState("");
   const [search, setSearch] = useState("");
 
+  const { getTasksFiltered } = useTasks();
+
   const handleFilters = async (status, search) => {
-    console.log(status, search);
+    getTasksFiltered(status, search);
   };
 
   return (
