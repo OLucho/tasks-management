@@ -22,8 +22,8 @@ export function TasksProvider({ children }) {
       try {
         const res = await api.delete(`/tasks/${id}`);
         if (res.status === 200) {
-          let currentTasks = tasks;
-          let newTasks = currentTasks.filter((task) => task.id !== id);
+          const currentTasks = tasks;
+          const newTasks = currentTasks.filter((task) => task.id !== id);
           setTasks(newTasks);
         }
       } catch (error) {
@@ -39,8 +39,8 @@ export function TasksProvider({ children }) {
         const res = await api.post(`/tasks/`, { title, description });
         if (res.status === 201) {
           const currentTasks = tasks;
-          currentTasks.push(res.data);
-          setTasks(currentTasks);
+          const newTasks = [...currentTasks, res.data];
+          setTasks(newTasks);
         }
       } catch (error) {
         console.log(error.message);
