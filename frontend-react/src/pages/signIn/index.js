@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -49,12 +50,15 @@ export default function SignIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const history = useHistory();
+
   const { signIn } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await signIn(username, password);
+      history.push("/");
     } catch (error) {
       console.log(error);
     }
