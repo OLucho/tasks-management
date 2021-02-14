@@ -1,11 +1,11 @@
+import Providers from "./hooks";
 import Routes from "./routes";
-import { AuthProvider } from "././hooks/useAuth";
 
 function App() {
   return (
-    <AuthProvider>
+    <Providers>
       <Routes />
-    </AuthProvider>
+    </Providers>
   );
 }
 
