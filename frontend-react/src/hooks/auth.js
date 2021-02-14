@@ -5,8 +5,8 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [data, setData] = useState(() => {
-    const token = localStorage.getItem("@taskManagment:token");
-    const user = localStorage.getItem("@taskManagment:user");
+    const token = localStorage.getItem("@taskManagement:token");
+    const user = localStorage.getItem("@taskManagement:user");
     if (token && user) {
       api.defaults.headers.authorization = `Bearer ${token}`;
       return { token, user: JSON.parse(user) };
@@ -29,8 +29,8 @@ export function AuthProvider({ children }) {
         const token = auth.data.accessToken;
         api.defaults.headers.authorization = `Bearer ${token}`;
         const user = await api.get("/auth/user");
-        localStorage.setItem("@taskManagment:token", token);
-        localStorage.setItem("@taskManagment:user", JSON.stringify(user.data));
+        localStorage.setItem("@taskManagement:token", token);
+        localStorage.setItem("@taskManagement:user", JSON.stringify(user.data));
 
         setData({
           user: user.data,
@@ -43,8 +43,8 @@ export function AuthProvider({ children }) {
   }, []);
 
   function signOut() {
-    localStorage.removeItem("@Innstagram:token");
-    localStorage.removeItem("@Innstagram:token");
+    localStorage.removeItem("@taskManagement:token");
+    localStorage.removeItem("@taskManagement:user");
     setData({ token: null, user: null });
   }
 
