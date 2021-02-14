@@ -4,7 +4,7 @@ import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import TaskDeleteButton from "./task-deleteButton";
-import { FormControl, Grid, MenuItem, Select } from "@material-ui/core";
+import { FormControl, MenuItem, Select } from "@material-ui/core";
 import { useTasks } from "../../hooks/tasks";
 
 const useStyles = makeStyles({
@@ -13,12 +13,13 @@ const useStyles = makeStyles({
     width: "100%",
     alignItems: "center",
     margin: "1rem 0",
-    textAlign: "center",
   },
   media: {
     height: 140,
   },
-  content: {},
+  content: {
+    fontSize: "2rem",
+  },
 });
 
 export default function Task({ task }) {
@@ -34,15 +35,13 @@ export default function Task({ task }) {
   return (
     <Card className={classes.root}>
       <CardContent>
-        <Grid item>
-          <FormControl style={{ width: "140px" }}>
-            <Select value={status} onChange={handleStatus} displayEmpty>
-              <MenuItem value={"OPEN"}>Open</MenuItem>
-              <MenuItem value={"IN_PROGRESS"}>In Progress</MenuItem>
-              <MenuItem value={"DONE"}>Done</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
+        <FormControl style={{ width: "140px" }}>
+          <Select value={status} onChange={handleStatus} displayEmpty>
+            <MenuItem value={"OPEN"}>Open</MenuItem>
+            <MenuItem value={"IN_PROGRESS"}>In Progress</MenuItem>
+            <MenuItem value={"DONE"}>Done</MenuItem>
+          </Select>
+        </FormControl>
       </CardContent>
       <CardContent className={classes.content}>{task.title}</CardContent>
       <CardContent>{task.description}</CardContent>
