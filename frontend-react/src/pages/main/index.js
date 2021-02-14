@@ -35,7 +35,7 @@ export default function Main() {
         <TaskForm />
       </Box>
       <Box display="flex" flexDirection="column" alignItems="center">
-        <TasksList tasks={tasks} />
+        {tasks.length !== 0 ? <TasksList tasks={tasks} /> : <p>No tasks yet</p>}
       </Box>
     </Container>
   );
