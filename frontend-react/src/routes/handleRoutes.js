@@ -1,5 +1,5 @@
 import { Route, Redirect } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../hooks/auth";
 
 export default function HandleRoutes({
   isPrivate = false,
