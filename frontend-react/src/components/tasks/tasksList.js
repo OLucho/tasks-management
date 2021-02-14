@@ -1,5 +1,5 @@
 import Task from "./task";
 
 export default function TasksList({ tasks }) {
-  return tasks.map((task) => <Task task={task} />);
+  return tasks.map((task) => <Task key={task.id} task={task} />);
 }

@@ -17,11 +17,27 @@ export function TasksProvider({ children }) {
     }
   }, []);
 
+  const deleteTask = useCallback(
+    async (id) => {
+      try {
+        const res = await api.delete(`/tasks/${id}`);
+        if (res.status === 200) {
+          let currentTasks = tasks;
+          let newTasks = currentTasks.filter((task) => task.id !== id);
+          setTasks(newTasks);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    },
+    [tasks]
+  );
   return (
     <TasksContext.Provider
       value={{
         tasks,
         getTasks,
+        deleteTask,
       }}
     >
       {children}
