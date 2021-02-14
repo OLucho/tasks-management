@@ -26,3 +26,4 @@
 **Run the project**
 1. `npm run dev`  to run client and server en development mode 
 
+:warning: **NestJs must run in port 3000**
