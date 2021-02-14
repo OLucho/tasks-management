@@ -51,8 +51,7 @@ export function TasksProvider({ children }) {
 
   const handleStatusChange = useCallback(async (id, status) => {
     try {
-      const res = await api.patch(`/tasks/${id}/status`, { status });
-      console.log(res);
+      await api.patch(`/tasks/${id}/status`, { status });
     } catch (error) {
       console.log(error.message);
     }
