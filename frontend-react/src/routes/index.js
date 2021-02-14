@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
+import Route from "./handleRoutes";
 import signIn from "../pages/signIn";
 import SignUp from "../pages/signUp";
 export default function Routes() {
