@@ -48,6 +48,16 @@ export function TasksProvider({ children }) {
     },
     [tasks]
   );
+
+  const handleStatusChange = useCallback(async (id, status) => {
+    try {
+      const res = await api.patch(`/tasks/${id}/status`, { status });
+      console.log(res);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }, []);
+
   return (
     <TasksContext.Provider
       value={{
@@ -55,6 +65,7 @@ export function TasksProvider({ children }) {
         getTasks,
         deleteTask,
         createTask,
+        handleStatusChange,
       }}
     >
       {children}
