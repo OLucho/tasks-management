@@ -17,7 +17,27 @@ export function AuthProvider({ children }) {
   const signUp = useCallback(async (username, password) => {
     try {
       console.log(username, password);
-      const res = await api.post("/auth/signup", { username, password });
+      await api.post("/auth/signup", { username, password });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const signIn = useCallback(async (username, password) => {
+    try {
+      const auth = await api.post("/auth/signin", { username, password });
+      if (auth.status === 201) {
+        const token = auth.data.accessToken;
+        api.defaults.headers.authorization = `Bearer ${token}`;
+        const user = await api.get("/auth/user");
+        localStorage.setItem("@taskManagment:token", token);
+        localStorage.setItem("@taskManagment:user", JSON.stringify(user.data));
+
+        setData({
+          user: user.data,
+          token,
+        });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -30,7 +50,7 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user: data.user, signUp, signOut }}>
+    <AuthContext.Provider value={{ user: data.user, signUp, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
