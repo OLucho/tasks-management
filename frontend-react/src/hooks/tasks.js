@@ -32,12 +32,29 @@ export function TasksProvider({ children }) {
     },
     [tasks]
   );
+
+  const createTask = useCallback(
+    async (title, description) => {
+      try {
+        const res = await api.post(`/tasks/`, { title, description });
+        if (res.status === 201) {
+          const currentTasks = tasks;
+          currentTasks.push(res.data);
+          setTasks(currentTasks);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    },
+    [tasks]
+  );
   return (
     <TasksContext.Provider
       value={{
         tasks,
         getTasks,
         deleteTask,
+        createTask,
       }}
     >
       {children}

@@ -5,11 +5,14 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { useState } from "react";
+import { useTasks } from "../../hooks/tasks";
 
 export default function TaskForm() {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+
+  const { createTask } = useTasks();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -20,7 +23,8 @@ export default function TaskForm() {
   };
 
   const handleCreateTask = () => {
-    console.log(title, description);
+    createTask(title, description);
+    setOpen(false);
   };
 
   return (
@@ -33,7 +37,7 @@ export default function TaskForm() {
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+        <DialogTitle id="form-dialog-title">Create Task ♦</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
