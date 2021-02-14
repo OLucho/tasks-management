@@ -1,5 +1,5 @@
 import Box from "@material-ui/core/Box";
-import { Container, makeStyles } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import { useAuth } from "../../hooks/auth";
 import { useTasks } from "../../hooks/tasks";
 import { useEffect } from "react";
