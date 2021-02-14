@@ -2,8 +2,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
-import { useTasks } from "../../hooks/tasks";
+import TaskDeleteButton from "./task-deleteButton";
+
 const useStyles = makeStyles({
   root: {
     maxWidth: 900,
@@ -20,20 +20,13 @@ const useStyles = makeStyles({
 
 export default function Task({ task }) {
   const classes = useStyles();
-  const { deleteTask } = useTasks();
-
-  const handleDeleteTask = () => {
-    deleteTask(task.id);
-  };
 
   return (
     <Card className={classes.root}>
       <CardContent className={classes.content}>{task.title}</CardContent>
       <CardContent>{task.description}</CardContent>
       <CardActions>
-        <Button size="small" color="secondary" onClick={handleDeleteTask}>
-          Delete
-        </Button>
+        <TaskDeleteButton id={task.id} />
       </CardActions>
     </Card>
   );
