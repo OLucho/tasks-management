@@ -5,6 +5,7 @@ import { useAuth } from "../../hooks/auth";
 import { useTasks } from "../../hooks/tasks";
 import { useEffect } from "react";
 import TasksList from "../../components/tasks/tasksList";
+import TaskForm from "../../components/tasks/task-create-form";
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
@@ -32,9 +33,7 @@ export default function Main() {
             Hello <span>{user.username}</span>
           </p>
         </div>
-        <Button variant="contained" color="primary" className={classes.button}>
-          Create New Task
-        </Button>
+        <TaskForm />
       </Box>
       <Box display="flex" flexDirection="column" alignItems="center">
         <TasksList tasks={tasks} />
