@@ -16,7 +16,8 @@ export function AuthProvider({ children }) {
 
   const signUp = useCallback(async (username, password) => {
     try {
-      await api.post("/auth/signup", data);
+      console.log(username, password);
+      const res = await api.post("/auth/signup", { username, password });
     } catch (error) {
       console.log(error);
     }
