@@ -1,0 +1,29 @@
+{
+  "name": "task-management-crud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^5.3.0"
+  },
+  "scripts": {
+    "dev": "concurrently \"npm run dev-server\" \"npm run dev-client\"",
+    "dev-server": "cd backend-nestjs && npm run start:dev",
+    "dev-client": "cd frontend-react && npm start",
+    "install-all": "concurrently \"npm run client-install\" \"npm run server-install\"",
+    "client-install": "cd frontend-react && npm install",
+    "server-install": "cd backend-nestjs && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OLucho/tasks-managment.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OLucho/tasks-managment/issues"
+  },
+  "homepage": "https://github.com/OLucho/tasks-managment#readme"
+}
