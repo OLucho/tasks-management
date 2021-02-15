@@ -26,6 +26,8 @@ export default function TaskForm() {
   const handleCreateTask = () => {
     createTask(title, description);
     setOpen(false);
+    setTitle("");
+    setDescription("");
   };
 
   return (
@@ -62,6 +64,7 @@ export default function TaskForm() {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            autoComplete="off"
             fullWidth
           />
           <TextField
@@ -72,6 +75,7 @@ export default function TaskForm() {
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            autoComplete="off"
             fullWidth
           />
         </DialogContent>

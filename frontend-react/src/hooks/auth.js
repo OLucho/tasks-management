@@ -4,7 +4,7 @@ import api from "../services/api";
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
 
   const [data, setData] = useState(() => {
     const token = localStorage.getItem("@taskManagement:token");
@@ -55,7 +55,7 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user: data.user, error, signUp, signIn, signOut }}
+      value={{ user: data.user, error, signUp, signIn, signOut, setError }}
     >
       {children}
     </AuthContext.Provider>

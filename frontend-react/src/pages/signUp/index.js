@@ -19,7 +19,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link color="primary" href="https://github.com/olucho/">
-        Lucho
+        Lucho{" "}
       </Link>
       {new Date().getFullYear()}
     </Typography>
@@ -48,19 +48,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
-  const { signUp, error } = useAuth();
+  const { signUp, error, setError } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    history.push("/signin");
     try {
       await signUp(username, password);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      setError(true);
     }
   };
 
