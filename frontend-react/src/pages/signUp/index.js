@@ -11,7 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useAuth } from "../../hooks/auth";
-import { Alert } from "@material-ui/lab";
+import Error from "../../components/error/";
 
 function Copyright() {
   return (
@@ -72,14 +72,7 @@ export default function SignUp() {
           Sign up
         </Typography>
 
-        {error && (
-          <Alert
-            severity="error"
-            style={{ margin: "1rem 0", textTransform: "capitalize" }}
-          >
-            {error}!
-          </Alert>
-        )}
+        {error && <Error error={error} />}
 
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <Grid container spacing={2}>

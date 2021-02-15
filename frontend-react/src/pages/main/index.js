@@ -9,6 +9,7 @@ import TasksList from "../../components/tasks/tasksList";
 import TaskForm from "../../components/tasks/task-create-form";
 import TasksFilter from "../../components/tasks/task-filter";
 import { Alert } from "@material-ui/lab";
+import Error from "../../components/error";
 
 export default function Main() {
   const { user, signOut } = useAuth();
@@ -21,6 +22,7 @@ export default function Main() {
       console.log(error);
     }
   }, [getTasks]);
+
   return (
     <Container display="flex" alignItems="center">
       <Box display="flex" justifyContent="space-evenly">
@@ -37,14 +39,7 @@ export default function Main() {
       </Box>
 
       <Box display="flex" flexDirection="column" alignItems="center">
-        {error && (
-          <Alert
-            severity="error"
-            style={{ margin: "1rem 0", textTransform: "capitalize" }}
-          >
-            {error}!
-          </Alert>
-        )}
+        {error && <Error error={error} />}
         <TasksFilter />
         {tasks.length !== 0 ? (
           <TasksList tasks={tasks} />
