@@ -4,6 +4,8 @@ import api from "../services/api";
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
+  const [error, setError] = useState("");
+
   const [data, setData] = useState(() => {
     const token = localStorage.getItem("@taskManagement:token");
     const user = localStorage.getItem("@taskManagement:user");
@@ -18,7 +20,7 @@ export function AuthProvider({ children }) {
     try {
       await api.post("/auth/signup", { username, password });
     } catch (error) {
-      console.log(error);
+      setError(error.response.data.message);
     }
   }, []);
 
@@ -38,7 +40,7 @@ export function AuthProvider({ children }) {
         });
       }
     } catch (error) {
-      console.log(error);
+      setError(error.response.data.message);
     }
   }, []);
 
@@ -49,7 +51,9 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user: data.user, signUp, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ user: data.user, error, signUp, signIn, signOut }}
+    >
       {children}
     </AuthContext.Provider>
   );

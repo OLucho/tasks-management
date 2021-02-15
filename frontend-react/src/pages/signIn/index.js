@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
+import { Alert } from "@material-ui/lab";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -52,7 +53,7 @@ export default function SignIn() {
 
   const history = useHistory();
 
-  const { signIn } = useAuth();
+  const { signIn, error } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -74,6 +75,14 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
+        {error && (
+          <Alert
+            severity="error"
+            style={{ margin: "1rem 0", textTransform: "capitalize" }}
+          >
+            {error}!
+          </Alert>
+        )}
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
