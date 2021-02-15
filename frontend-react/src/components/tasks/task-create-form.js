@@ -6,13 +6,14 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { useState } from "react";
 import { useTasks } from "../../hooks/tasks";
+import { Alert } from "@material-ui/lab";
 
 export default function TaskForm() {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const { createTask } = useTasks();
+  const { createTask, error } = useTasks();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -39,6 +40,14 @@ export default function TaskForm() {
       >
         <DialogTitle id="form-dialog-title">Create Task ♦</DialogTitle>
         <DialogContent>
+          {error && (
+            <Alert
+              severity="error"
+              style={{ margin: "1rem 0", textTransform: "capitalize" }}
+            >
+              {error}!
+            </Alert>
+          )}
           <TextField
             autoFocus
             margin="dense"

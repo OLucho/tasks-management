@@ -8,10 +8,11 @@ import { useEffect } from "react";
 import TasksList from "../../components/tasks/tasksList";
 import TaskForm from "../../components/tasks/task-create-form";
 import TasksFilter from "../../components/tasks/task-filter";
+import { Alert } from "@material-ui/lab";
 
 export default function Main() {
   const { user, signOut } = useAuth();
-  const { getTasks, tasks } = useTasks();
+  const { getTasks, tasks, error } = useTasks();
 
   useEffect(() => {
     try {
@@ -36,8 +37,20 @@ export default function Main() {
       </Box>
 
       <Box display="flex" flexDirection="column" alignItems="center">
+        {error && (
+          <Alert
+            severity="error"
+            style={{ margin: "1rem 0", textTransform: "capitalize" }}
+          >
+            {error}!
+          </Alert>
+        )}
         <TasksFilter />
-        {tasks.length !== 0 ? <TasksList tasks={tasks} /> : <p>No tasks yet</p>}
+        {tasks.length !== 0 ? (
+          <TasksList tasks={tasks} />
+        ) : (
+          <p>No tasks found</p>
+        )}
       </Box>
     </Container>
   );

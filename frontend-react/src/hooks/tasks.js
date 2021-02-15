@@ -6,15 +6,16 @@ const TasksContext = createContext();
 
 export function TasksProvider({ children }) {
   const [tasks, setTasks] = useState([]);
-
+  const [error, setError] = useState("");
   const getTasks = useCallback(async () => {
     try {
       const res = await api.get("/tasks");
       if (res.status === 200) {
         setTasks(res.data);
+        setError(false);
       }
     } catch (error) {
-      console.log(error.message);
+      setError(error.response.data.message);
     }
   }, []);
 
@@ -26,9 +27,10 @@ export function TasksProvider({ children }) {
           const currentTasks = tasks;
           const newTasks = currentTasks.filter((task) => task.id !== id);
           setTasks(newTasks);
+          setError(false);
         }
       } catch (error) {
-        console.log(error.message);
+        setError(error.response.data.message);
       }
     },
     [tasks]
@@ -42,9 +44,10 @@ export function TasksProvider({ children }) {
           const currentTasks = tasks;
           const newTasks = [...currentTasks, res.data];
           setTasks(newTasks);
+          setError(false);
         }
       } catch (error) {
-        console.log(error.message);
+        setError(error.response.data.message);
       }
     },
     [tasks]
@@ -65,16 +68,18 @@ export function TasksProvider({ children }) {
       const res = await api.get("/tasks" + (queryStr ? `?${queryStr}` : ""));
       const newTasks = res.data;
       setTasks(newTasks);
+      setError(false);
     } catch (error) {
-      console.log(error.message);
+      setError(error.response.data.message);
     }
   }, []);
 
   const handleStatusChange = useCallback(async (id, status) => {
     try {
       await api.patch(`/tasks/${id}/status`, { status });
+      setError(false);
     } catch (error) {
-      console.log(error.message);
+      setError(error.response.data.message);
     }
   }, []);
 
@@ -82,6 +87,7 @@ export function TasksProvider({ children }) {
     <TasksContext.Provider
       value={{
         tasks,
+        error,
         getTasks,
         deleteTask,
         createTask,
