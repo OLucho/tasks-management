@@ -19,6 +19,7 @@ export function AuthProvider({ children }) {
   const signUp = useCallback(async (username, password) => {
     try {
       await api.post("/auth/signup", { username, password });
+      setError(false);
     } catch (error) {
       setError(error.response.data.message);
     }
@@ -39,6 +40,7 @@ export function AuthProvider({ children }) {
           token,
         });
       }
+      setError(false);
     } catch (error) {
       setError(error.response.data.message);
     }
@@ -48,6 +50,7 @@ export function AuthProvider({ children }) {
     localStorage.removeItem("@taskManagement:token");
     localStorage.removeItem("@taskManagement:user");
     setData({ token: null, user: null });
+    setError(false);
   }
 
   return (
