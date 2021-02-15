@@ -7,7 +7,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { useState } from "react";
 import { useTasks } from "../../hooks/tasks";
 import { Alert } from "@material-ui/lab";
-
+import AddIcon from "@material-ui/icons/Add";
 export default function TaskForm() {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
@@ -38,7 +38,13 @@ export default function TaskForm() {
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Create Task ♦</DialogTitle>
+        <DialogTitle
+          id="form-dialog-title"
+          style={{ display: "flex", alignItems: "center" }}
+        >
+          Create Task <AddIcon />
+        </DialogTitle>
+
         <DialogContent>
           {error && (
             <Alert

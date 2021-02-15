@@ -1,14 +1,12 @@
 import Box from "@material-ui/core/Box";
 import { Container, IconButton } from "@material-ui/core";
 import SignOutIcon from "@material-ui/icons/ExitToApp";
-
 import { useAuth } from "../../hooks/auth";
 import { useTasks } from "../../hooks/tasks";
 import { useEffect } from "react";
 import TasksList from "../../components/tasks/tasksList";
 import TaskForm from "../../components/tasks/task-create-form";
 import TasksFilter from "../../components/tasks/task-filter";
-import { Alert } from "@material-ui/lab";
 import Error from "../../components/error";
 
 export default function Main() {
@@ -29,7 +27,16 @@ export default function Main() {
         <div>
           <h1>Tasks Management</h1>
           <p>
-            Hello <span>{user.username}</span>
+            Hello{" "}
+            <span
+              style={{
+                color: "cornflowerblue",
+                fontWeight: 700,
+                fontSize: " ",
+              }}
+            >
+              {user.username}
+            </span>
           </p>
           <TaskForm />
         </div>
@@ -44,7 +51,11 @@ export default function Main() {
         {tasks.length !== 0 ? (
           <TasksList tasks={tasks} />
         ) : (
-          <p>No tasks found</p>
+          <p
+            style={{ fontSize: "1.4rem", fontWeight: 800, color: "cadetblue" }}
+          >
+            No tasks found
+          </p>
         )}
       </Box>
     </Container>
