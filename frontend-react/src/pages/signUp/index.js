@@ -52,7 +52,6 @@ export default function SignUp() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -63,13 +62,13 @@ export default function SignUp() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" data-cy="page-container">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" data-cy="title">
           Sign up
         </Typography>
 
@@ -88,6 +87,7 @@ export default function SignUp() {
                 autoComplete="off"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                data-cy="input-username"
               />
             </Grid>
             <Grid item xs={12}>
@@ -102,6 +102,7 @@ export default function SignUp() {
                 autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                data-cy="input-password"
               />
             </Grid>
           </Grid>
@@ -111,6 +112,7 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            data-cy="submit"
           >
             Sign Up
           </Button>
