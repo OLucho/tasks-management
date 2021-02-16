@@ -65,17 +65,22 @@ export default function SignIn() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" data-cy="page-container">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" data-cy="title">
           Sign in
         </Typography>
         {error && <Error error={error} />}
-        <form className={classes.form} noValidate onSubmit={handleSubmit}>
+        <form
+          className={classes.form}
+          noValidate
+          onSubmit={handleSubmit}
+          data-cy="form"
+        >
           <TextField
             variant="outlined"
             margin="normal"
@@ -88,6 +93,7 @@ export default function SignIn() {
             autoFocus
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            data-cy="input-username"
           />
           <TextField
             variant="outlined"
@@ -101,6 +107,7 @@ export default function SignIn() {
             autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            data-cy="input-password"
           />
           <Button
             type="submit"
@@ -108,12 +115,13 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            data-cy="submit"
           >
             Sign In
           </Button>
           <Grid container>
             <Grid item>
-              <Link href="/signup" variant="body2">
+              <Link href="/signup" variant="body2" data-cy="signup">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

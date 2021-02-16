@@ -1,4 +1,3 @@
-import { Alert } from "@material-ui/lab";
 import AlertError from "./alert-error";
 
 export default function Error({ error }) {
