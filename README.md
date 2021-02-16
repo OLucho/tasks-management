@@ -14,6 +14,7 @@
 - ♻️ **Hooks & Context** — To handle State
 - 🌀 **React Router Dom** — DOM bindings for React Router.
 - 🐘 **PostgreSQL** — A powerful RDBMS
+- **Tested E2E with Cypress**
 
 
 ### Features:
