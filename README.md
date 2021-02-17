@@ -15,6 +15,8 @@
 - 🌀 **React Router Dom** — DOM bindings for React Router.
 - 🐘 **PostgreSQL** — A powerful RDBMS
 - ⚙️ **Cypress** - Testing E2E
+- ⚙️ **Jest** - Unit Testing
+
 
 ### Features:
 - Authentication with JsonWebToken
