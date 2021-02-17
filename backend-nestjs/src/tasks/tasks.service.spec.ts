@@ -1,5 +1,6 @@
 import { NotFoundException } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
+import { async } from 'rxjs';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTasksFilterDto } from './dto/filtered-tasks.dto';
 import { TaskStatus } from './task.model';
@@ -102,6 +103,24 @@ describe('TaskService', () => {
         expect(tasksService.deleteTask(1, mockUser)).rejects.toThrow(
           NotFoundException,
         );
+      });
+    });
+    describe('UpdateTaskStatus', () => {
+      it('Update task status correctly', async () => {
+        const save = jest.fn().mockResolvedValue(true);
+        tasksService.getTaskById = jest.fn().mockResolvedValue({
+          status: TaskStatus.OPEN,
+          save,
+        });
+        const result = await tasksService.updateTaskStatus(
+          1,
+          TaskStatus.DONE,
+          mockUser,
+        );
+
+        expect(tasksService.getTaskById).toHaveBeenCalled();
+        expect(save).toHaveBeenCalled();
+        expect(result.status).toEqual(TaskStatus.DONE);
       });
     });
   });
