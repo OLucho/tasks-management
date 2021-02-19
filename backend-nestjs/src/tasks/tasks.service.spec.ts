@@ -1,6 +1,5 @@
 import { NotFoundException } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
-import { async } from 'rxjs';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTasksFilterDto } from './dto/filtered-tasks.dto';
 import { TaskStatus } from './task.model';
